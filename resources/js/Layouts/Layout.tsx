@@ -16,12 +16,19 @@ const Layout = ({ children }: PropsWithChildren) => {
                         <h1 className="text-2xl font-medium">
                             Another Blog Site
                         </h1>
-                        <nav>
+                        <nav className="space-x-4">
                             <NavLink
                                 href={route("home")}
                                 active={route().current("home")}
                             >
                                 Home
+                            </NavLink>
+
+                            <NavLink
+                                href={route("posts.create")}
+                                active={route().current("posts.create")}
+                            >
+                                Create Post
                             </NavLink>
                         </nav>
                     </div>
@@ -44,7 +51,7 @@ const Layout = ({ children }: PropsWithChildren) => {
                     </Popover>
                 </div>
             </header>
-            <main>{children}</main>
+            <main className="container mx-auto px-6 mt-2">{children}</main>
         </div>
     );
 };

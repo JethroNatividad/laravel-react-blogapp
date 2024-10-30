@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,8 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Home');
 })->middleware(['auth'])->name('home');
+
+Route::resource('posts', PostController::class)->only(['create', 'store'])->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
