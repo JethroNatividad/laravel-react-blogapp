@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Post;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -20,7 +21,9 @@ use Inertia\Inertia;
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/', function () {
-    return Inertia::render('Home');
+    return Inertia::render('Home', [
+        'posts' => Post::with('user:id,name')->latest()->get()
+    ]);
 })->middleware(['auth'])->name('home');
 
 Route::resource('posts', PostController::class)->only(['create', 'store'])->middleware('auth');
