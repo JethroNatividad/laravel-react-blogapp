@@ -1,6 +1,8 @@
 import Post from "@/Components/Post";
 import Layout from "@/Layouts/Layout";
 
+import { usePoll } from "@inertiajs/react";
+
 type Props = {
     posts: {
         id: number;
@@ -15,6 +17,8 @@ type Props = {
 };
 
 const Home = ({ posts }: Props) => {
+    usePoll(2000, { only: ["posts"] });
+
     return (
         <Layout>
             <p className="text-2xl mb-6">Posts</p>
