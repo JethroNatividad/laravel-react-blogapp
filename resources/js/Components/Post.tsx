@@ -18,7 +18,11 @@ const Post = ({ post, is_author }: Props) => {
         <div className="rounded-md border p-4">
             <div className="mb-4 flex justify-between items-start">
                 <div>
-                    <p className="font-medium">{user.name}</p>
+                    <p className="font-medium">
+                        <Link href={route("user.posts", user.id)}>
+                            {user.name}
+                        </Link>
+                    </p>
                     <p className="text-slate-500">
                         {dayjs(created_at).fromNow()}
                     </p>
