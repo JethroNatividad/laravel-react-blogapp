@@ -1,20 +1,15 @@
 import Post from "@/Components/Post";
 import Layout from "@/Layouts/Layout";
+import type { Post as TypePost } from "@/types";
+import { usePage } from "@inertiajs/react";
 
 type Props = {
-    posts: {
-        id: number;
-        title: string;
-        content: string;
-        created_at: string;
-        user: {
-            name: string;
-            id: string;
-        };
-    }[];
+    posts: TypePost[];
 };
 
 const Home = ({ posts }: Props) => {
+    const user = usePage().props.auth.user;
+
     return (
         <Layout>
             <p className="text-2xl mb-6">Posts</p>
@@ -22,10 +17,8 @@ const Home = ({ posts }: Props) => {
                 {posts.map((post) => (
                     <Post
                         key={post.id}
-                        title={post.title}
-                        content={post.content}
-                        author={post.user.name}
-                        created_at={post.created_at}
+                        post={post}
+                        is_author={user.id === post.user.id}
                     />
                 ))}
             </div>

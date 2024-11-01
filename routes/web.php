@@ -26,7 +26,7 @@ Route::get('/', function () {
     ]);
 })->middleware(['auth'])->name('home');
 
-Route::resource('posts', PostController::class)->only(['create', 'store'])->middleware('auth');
+Route::resource('posts', PostController::class)->only(['create', 'store', 'edit', 'update'])->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
