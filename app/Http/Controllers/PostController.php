@@ -25,10 +25,18 @@ class PostController extends Controller
         return redirect()->route('home');
     }
 
-    public function edit(Request $request, $id): Response
+    public function edit($id): Response
     {
+        $post = Post::find($id);
+
+        if (!$post) {
+            abort(404);
+        }
+
+        Gate::authorize('update', $post);
+
         return Inertia::render('Posts/Edit', [
-            'post' => $request->user()->posts()->findOrFail($id),
+            'post' => $post,
         ]);
     }
 
@@ -37,6 +45,15 @@ class PostController extends Controller
         Gate::authorize('update', $post);
 
         $post->update($request->validated());
+
+        return redirect()->route('home');
+    }
+
+    public function destroy(Post $post): RedirectResponse
+    {
+        Gate::authorize('delete', $post);
+
+        $post->delete();
 
         return redirect()->route('home');
     }

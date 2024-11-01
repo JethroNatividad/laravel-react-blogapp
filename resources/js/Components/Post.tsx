@@ -31,10 +31,18 @@ const Post = ({ post, is_author }: Props) => {
                                 ⋮
                             </Button>
                         </PopoverTrigger>
-                        <PopoverContent className="w-fit p-1">
+                        <PopoverContent className="w-fit p-1 flex flex-col">
                             <Button variant="ghost" size="sm" asChild>
                                 <Link href={route("posts.edit", post.id)}>
                                     Edit
+                                </Link>
+                            </Button>
+                            <Button variant="ghost" size="sm" asChild>
+                                <Link
+                                    method="delete"
+                                    href={route("posts.destroy", post.id)}
+                                >
+                                    Delete
                                 </Link>
                             </Button>
                         </PopoverContent>
