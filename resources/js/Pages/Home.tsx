@@ -1,13 +1,14 @@
 import Post from "@/Components/Post";
 import Layout from "@/Layouts/Layout";
 import type { Post as TypePost } from "@/types";
-import { usePage } from "@inertiajs/react";
+import { usePage, usePoll } from "@inertiajs/react";
 
 type Props = {
     posts: TypePost[];
 };
 
 const Home = ({ posts }: Props) => {
+    usePoll(2000, { only: ["posts"] });
     const user = usePage().props.auth.user;
 
     return (
